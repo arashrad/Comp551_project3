@@ -32,7 +32,7 @@ trainY = np.load("/Users/gregorylaredo/Desktop/tinyY.npy")
 testX = np.load("/Users/gregorylaredo/Desktop/tinyX_test.npy") # (6600, 3, 64, 64)
 
 # to visualize only
-plt.imshow(trainX[1].transpose(2,1,0)) # put RGB channels last
+plt.imshow(testX[0].transpose(2,1,0)) # put RGB channels last
 plt.show()
 #x = trainX[1]
 #len(x)
@@ -90,8 +90,23 @@ print("[INFO] evaluating on test set...")
 (loss,accuracy) = model.evaluate(testData, testLabels, batch_size=128, verbose=1)
 print("[INFO] loss={:.4f}, accuracy: {:.4f}%".format(loss,accuracy*100))
 
+# ======= Predict on Test Set based on above Model
+testX_reshape = np.reshape(testX,[len(testX),64,64,3])
+testX_data = []
+for (i,testX_reshape) in enumerate(testX_reshape):
+    features = image_to_feature_vector(testX_reshape)
+    testX_data.append(features)
+testX_data = np.array(testX_data) / 255.0
 
+pred = model.predict(testX_data, batch_size=128, verbose=1)
 
+pred_cat = np.zeros((len(pred),1))
+for i in range(len(pred)):
+    temp = pred[i,:]
+    pred_cat[i] = np.where(temp == temp.max())
+    
+# Export to CSV file
+np.savetxt("prediction_1%trainingset_kerasNN_2Hlayers.csv",pred_cat)
 
 
 
