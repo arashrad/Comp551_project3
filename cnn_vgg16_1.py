@@ -121,8 +121,6 @@ def train_top_model():
               validation_data=(validation_data, validation_labels), shuffle=False)
     model.save_weights(top_model_weights_path)
 
-)
-
 
 # save_bottlebeck_features()
 train_top_model()
