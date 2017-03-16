@@ -1,0 +1,7 @@
+nnModel.py includes the model used to contruct the single-layered neural network
+
+nn.py includes the code to run the model
+
+The global variables are parameters that the user can change
+
+Execute'python nn.py' to run the file
