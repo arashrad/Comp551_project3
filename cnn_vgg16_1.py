@@ -40,8 +40,7 @@ Y_train = np_utils.to_categorical(y_train, 40)
 Y_valid = np_utils.to_categorical(y_valid, 40)
 X_train = np.array(X_train.astype('float32'))
 X_valid = np.array(X_valid.astype('float32'))
-# X_valid = X_valid / 255.0
-# X_train /= 255.0
+0
 
 
 # dimensions of our images.
@@ -89,14 +88,6 @@ def save_bottlebeck_features():
     np.save(open(path + '/bottleneck_features_train1.npy', 'w'),
             bottleneck_features_train)
 
-    # generator = datagen.flow_from_directory(
-    #     validation_data_dir,
-    #     target_size=(img_width, img_height),
-    #     batch_size=batch_size,
-    #     class_mode=None,
-    #     shuffle=False)
-    # datagen.fit(X_valid)
-    # generator = datagen.flow(X_valid, Y_valid, batch_size=batch_size)
     generator = train_gen(X_valid, Y_valid)
     bottleneck_features_validation = model.predict_generator(generator, nb_validation_samples)
     np.save(open(path + '/bottleneck_features_validation1.npy', 'w'),
@@ -126,24 +117,11 @@ def train_top_model():
     model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
     print(model.summary())
 
-
-    # model.compile(optimizer='adam',
-    #               loss='categorical_crossentropy', metrics=['accuracy'])
-
     model.fit(train_data, train_labels, nb_epoch=epochs, batch_size=32,
               validation_data=(validation_data, validation_labels), shuffle=False)
     model.save_weights(top_model_weights_path)
-    # X_test = data_set_maker_test()
-    # X_test = X_test.astype('float32')
-    # X_test /= 255.0
-    # pred = model.predict(X_test)
-    # result = []
-    # for lst in pred:
-    #     result.append(np.argmax(lst))
-    #
-    # # print(result)
-    # # print(np.shape(result))
-    # test_result_file_maker("prediction_cnnvgg16_1.csv", result)
+
+)
 
 
 # save_bottlebeck_features()
