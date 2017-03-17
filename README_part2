@@ -1,4 +1,4 @@
-nnModel.py includes the model used to contruct the single-layered neural network
+nnModel.py includes the model used to construct the single-layered neural network
 
 nn.py includes the code to run the model
 
