@@ -15,3 +15,11 @@ cnn_prediction.py:
 logistic_regression_color_histogram.py:
 - create a folder in you codes directory and name it files
 - put all your .npy files inside that folder and run the code
+
+nnModel.py includes the model used to construct the single-layered neural network
+
+nn.py includes the code to run the model
+
+The global variables are parameters that the user can change
+
+Execute'python nn.py' to run the file
